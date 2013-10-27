@@ -41,7 +41,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Reel\Controller\Index' => 'Reel\Controller\IndexController',
-            'Reel\Controller\GetReel' => 'Reel\Controller\GetReelController',
+            'Reel\Controller\Get' => 'Reel\Controller\GetController',
         ),
     ),
 

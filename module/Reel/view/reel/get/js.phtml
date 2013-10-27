@@ -1,0 +1,20 @@
+(function (d, script) {
+    script = d.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    script.onload = function () {
+        head.load('css/jd.gallery.css');
+        head.js('http://code.jquery.com/jquery-1.10.1.min.js', 'http://ajax.googleapis.com/ajax/libs/mootools/1.1.1/mootools-yui-compressed.js', 'js/jd.gallery.js', function () {
+			
+			var $jq = jQuery.noConflict();
+			
+            $jq('#container').load('getReel.php', function () {
+                var asd = new gallery($('myGallery'), {
+                    timed: true
+                });
+            });
+        });
+    };
+    script.src = 'http://cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.min.js';
+    d.getElementsByTagName('head')[0].appendChild(script);
+}(document));
