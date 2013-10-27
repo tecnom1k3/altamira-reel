@@ -9,3 +9,5 @@ nbproject
 composer.lock
 vendor/bin
 src/
+logs/
+config/*.old
