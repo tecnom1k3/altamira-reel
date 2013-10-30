@@ -3,16 +3,58 @@
     script.type = 'text/javascript';
     script.async = true;
     script.onload = function () {
-        head.load('css/jd.gallery.css');
-        head.js('http://code.jquery.com/jquery-1.10.1.min.js', 'http://ajax.googleapis.com/ajax/libs/mootools/1.1.1/mootools-yui-compressed.js', 'js/jd.gallery.js', function () {
+        head.load('http://cdn.local/reel/get/style.css');
+        head.js('http://ajax.googleapis.com/ajax/libs/mootools/1.1.1/mootools-yui-compressed.js', 'http://cdn.local/reel/get/jd-gallery.js', function () {
 			
-			var $jq = jQuery.noConflict();
+			divGallery = document.createElement('div');
+			divGallery.id = 'myGallery';
 			
-            $jq('#container').load('getReel.php', function () {
-                var asd = new gallery($('myGallery'), {
+			<?php 
+			for ($i = 1; $i < 3; $i++):
+			?>
+			
+			divImageElement = document.createElement('div');
+			divImageElement.className = 'imageElement';
+			
+			titleImageElement = document.createElement('h3');
+			titleImageElement.textContent = 'Title';
+			
+			descriptionImageElement = document.createElement('p');
+			descriptionImageElement.textContent = 'Description';
+			
+			linkImageElement = document.createElement('a');
+			linkImageElement.setAttribute('href', '#');
+			linkImageElement.setAttribute('title', 'open image');
+			linkImageElement.setAttribute('class', 'open');
+			
+			fullImageElement = document.createElement('img');
+			fullImageElement.setAttribute('src', 'http://cdn.local/img/sites/brugges2006/<?php echo $i; ?>.jpg');
+			fullImageElement.setAttribute('class', 'full');
+			
+			thumbImageElement = document.createElement('img');
+			thumbImageElement.setAttribute('src', 'http://cdn.local/img/sites/brugges2006/<?php echo $i; ?>-mini.jpg');
+			thumbImageElement.setAttribute('class', 'thumbnail');
+			
+			
+			divImageElement.appendChild(titleImageElement);
+			divImageElement.appendChild(descriptionImageElement);
+			divImageElement.appendChild(linkImageElement);
+			divImageElement.appendChild(fullImageElement);
+			divImageElement.appendChild(thumbImageElement);
+			
+			
+			divGallery.appendChild(divImageElement);
+			
+			<?php 
+			endfor;
+			?>
+			
+			container = document.getElementById('container').appendChild(divGallery);
+			
+			var asd = new gallery($('myGallery'), {
                     timed: true
                 });
-            });
+			
         });
     };
     script.src = 'http://cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.min.js';
