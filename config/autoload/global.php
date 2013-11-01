@@ -12,5 +12,5 @@
  */
 
 return array(
-    // ...
+    'host' => 'domain.com'
 );

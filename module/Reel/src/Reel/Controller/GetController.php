@@ -24,9 +24,13 @@ class GetController extends AbstractActionController
         $headers = $response->getHeaders();
         
         $headers->addHeaderLine('content-type', 'text/javascript');
-
+        
+        $config = $this->getServiceLocator()->get('config');
+        
         $view = new ViewModel(array(
             'id' => $this->params()->fromRoute('id'),
+                'container' => $this->params()->fromRoute('container'),
+                'host' => $config['host'],
         ));
 
         $view->setTerminal(true);
