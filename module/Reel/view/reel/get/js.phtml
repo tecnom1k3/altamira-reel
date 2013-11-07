@@ -3,36 +3,36 @@
     script.type = 'text/javascript';
     script.async = true;
     script.onload = function () {
-        head.load('http://<?php echo $this->host; ?>/reel/get/style.css');
-        head.js('http://ajax.googleapis.com/ajax/libs/mootools/1.1.1/mootools-yui-compressed.js', 'http://<?php echo $this->host; ?>/reel/get/jd-gallery.js', function () {
+        head.load('http://<?php echo $this->host; ?>/css/gallery.css');
+        head.js('http://ajax.googleapis.com/ajax/libs/mootools/1.1.1/mootools-yui-compressed.js', 'http://<?php echo $this->host; ?>/js/jdGallery.js', function () {
 			
 			divGallery = document.createElement('div');
 			divGallery.id = 'myGallery';
 			
 			<?php 
-			for ($i = 1; $i < 3; $i++):
+			foreach ($this->images as $image):
 			?>
 			
 			divImageElement = document.createElement('div');
 			divImageElement.className = 'imageElement';
 			
 			titleImageElement = document.createElement('h3');
-			titleImageElement.textContent = 'Title';
+			titleImageElement.textContent = '<?php echo $image->getTitle() ?>';
 			
 			descriptionImageElement = document.createElement('p');
-			descriptionImageElement.textContent = 'Description';
+			descriptionImageElement.textContent = '<?php echo $image->getDescription() ?>';
 			
 			linkImageElement = document.createElement('a');
-			linkImageElement.setAttribute('href', '#');
+			linkImageElement.setAttribute('href', '<?php echo $image->getHref() ?>');
 			linkImageElement.setAttribute('title', 'open image');
 			linkImageElement.setAttribute('class', 'open');
 			
 			fullImageElement = document.createElement('img');
-			fullImageElement.setAttribute('src', 'http://<?php echo $this->host; ?>/img/sites/brugges2006/<?php echo $i; ?>.jpg');
+			fullImageElement.setAttribute('src', 'http://<?php echo $this->host; ?>/img/sites/<?php echo $this->domain ?>/<?php echo $image->getFile() ?>');
 			fullImageElement.setAttribute('class', 'full');
 			
 			thumbImageElement = document.createElement('img');
-			thumbImageElement.setAttribute('src', 'http://<?php echo $this->host; ?>/img/sites/brugges2006/<?php echo $i; ?>-mini.jpg');
+			thumbImageElement.setAttribute('src', 'http://<?php echo $this->host; ?>/img/sites/<?php echo $this->domain ?>/<?php echo $image->getThumbnail() ?>');
 			thumbImageElement.setAttribute('class', 'thumbnail');
 			
 			
@@ -46,7 +46,7 @@
 			divGallery.appendChild(divImageElement);
 			
 			<?php 
-			endfor;
+			endforeach;
 			?>
 			
 			container = document.getElementById('<?php echo $this->container; ?>').appendChild(divGallery);
