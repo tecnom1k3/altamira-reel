@@ -1,8 +1,12 @@
 <?php
 namespace Reel\Controller;
+
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
+use Doctrine\ORM\EntityManager;
+use Reel\Entity\Site;
+use Reel\Entity\GalleryProperties;
 
 class GetController extends AbstractActionController
 {
@@ -21,17 +25,29 @@ class GetController extends AbstractActionController
          * THIS GOES TO A BUSINESS SERVICE!!!
          */
 
+        /** @var $objectManager EntityManager */
         $objectManager = $this->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
         
         $apiKey = $this->params()->fromRoute('id');
-        
+
+        /** @var $site Site */
         $site = $objectManager->getRepository('Reel\Entity\Site')
             ->findOneBy(
                 array(
                         'apiKey' => $apiKey
                 ));
+
+        /** @var $galleryConfigs GalleryProperties */
+        $galleryConfigs = $site->getGalleryProperties();
         
+        $arrGalleryConfigs = array(
+                'timed' => $galleryConfigs->getTimed(),
+                'delay' => $galleryConfigs->getDelay(),
+                'showCarrousel' => $galleryConfigs->getShowCarrousel(),
+                'textShowCarrousel' => $galleryConfigs->getTextShowCarrousel(),
+                'showInfoPane' => $galleryConfigs->getShowInfopane()
+                );
         
         /*
          * END BUSINESS SERVICE
@@ -51,6 +67,7 @@ class GetController extends AbstractActionController
                         'host' => $config['host'],
                         'images' => $site->getImages(),
                         'domain' => $site->getDomain(),
+                        'galleryConfigs' => $arrGalleryConfigs,
                 ));
         
         $view->setTerminal(true);

@@ -8,3 +8,4 @@ logs/
 vendor/
 dev/
 public/img/sites/
+*.mno

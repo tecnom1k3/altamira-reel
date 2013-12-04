@@ -3,6 +3,7 @@ namespace Reel\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Reel\Entity\Image;
+use Reel\Entity\GalleryProperties;
 
 /**
  * Sites
@@ -47,6 +48,12 @@ class Site
      * @var Collection
      */
     private $images;
+    
+    /**
+     * @var \GalleryProperties
+     * @ORM\OneToOne(targetEntity="GalleryProperties", mappedBy="site")
+     */
+    private $galleryProperties;
     
 	/**
      * @return the $siteId
@@ -129,6 +136,23 @@ class Site
         $this->images->add($image);
         $image->setSite($this);
     }
+
+    /**
+     * @return \GalleryProperties
+     */
+    public function getGalleryProperties ()
+    {
+        return $this->galleryProperties;
+    }
+
+	/**
+     * @param GalleryProperties $galleryProperties
+     */
+    public function setGalleryProperties (GalleryProperties $galleryProperties)
+    {
+        $this->galleryProperties = $galleryProperties;
+    }
+
 
 
 }

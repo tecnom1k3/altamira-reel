@@ -52,7 +52,11 @@
 			container = document.getElementById('<?php echo $this->container; ?>').appendChild(divGallery);
 			
 			var asd = new gallery($('myGallery'), {
-                    timed: true
+                    timed: <?php echo $this->galleryConfigs['timed'] ?>,
+                    delay: <?php echo $this->galleryConfigs['delay'] ?>,
+                    showCarousel: <?php echo $this->galleryConfigs['showCarrousel'] ?>,
+                    textShowCarousel: '<?php echo $this->galleryConfigs['textShowCarrousel'] ?>',
+                    showInfopane: <?php echo $this->galleryConfigs['showInfoPane'] ?>
                 });
 			
         });
