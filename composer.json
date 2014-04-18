@@ -13,5 +13,13 @@
         "zendframework/zftool": "dev-master",
         "doctrine/doctrine-orm-module": "0.*",
         "zendframework/zend-developer-tools": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Auth\\": "module/Auth/src/"
+        },
+        "classmap": [
+            "Service/"
+        ]
     }
 }

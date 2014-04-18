@@ -8,10 +8,11 @@
 return array(
     'modules' => array(
         'ZendDeveloperTools',
-	'DoctrineModule',
-	'DoctrineORMModule',
+        'DoctrineModule',
+        'DoctrineORMModule',
         'Application',
-        'Reel'
+        'Reel',
+        'Auth'
         ),
     'module_listener_options' => array(
         'module_paths' => array(
