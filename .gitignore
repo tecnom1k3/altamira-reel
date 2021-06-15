@@ -2,7 +2,6 @@
 .idea/
 .project
 .settings/
-composer.lock
 config/application.config.old
 logs/
 vendor/
